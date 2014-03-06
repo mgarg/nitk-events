@@ -12,15 +12,15 @@
   require 'sqlcon.php';
 
   if($con = connect()){
-    $result = mysqli_query($con,"SELECT * FROM participant");
+    $result = $con->query("SELECT * FROM participant");
 
-    while($row = mysqli_fetch_assoc($result))
+    while($row = $result->fetch_assoc())
     {
       echo $row['name'] . " " . $row['contact_no'];
       echo "<br>";
     }
     echo "your event has been added";
-    mysqli_close($con);
+    $con->close();
   }  
 
   ?>

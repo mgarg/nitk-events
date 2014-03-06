@@ -1,11 +1,11 @@
 <?php
 function connect()
 {
-	$con=mysqli_connect("localhost","root","root","nitk");
+	$con= new mysqli("localhost","root","root","nitk");
 	// Check connection
-	if (mysqli_connect_errno())
+	if ($con->connect_errno) 
 	{
-		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		echo "Failed to connect to MySQL: " . $con->connect_errno;
 	}
 	return $con;
 }

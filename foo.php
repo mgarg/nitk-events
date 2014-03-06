@@ -1,20 +1,21 @@
 <?php
-$q=$_REQUEST["arg1"]; $hint="";
+
 
 require 'sqlcon.php';
 $con = connect();
-if($con){
-	$result = mysqli_query($con, "SELECT * FROM participant");
+$failed = 1;
 
-	while($row = mysqli_fetch_array($result))
-	{
-		echo $row['name'] . " " . $row['contact_no'];
-		echo "<br>";
+if($con = connect()){
+	$result = $con->query("SELECT * FROM participant WHERE pid = " . $_REQUEST['id']);
+	if($row = $result->fetch_assoc()){
+		echo $row['name'];
+		$failed = 0;
 	}
-
-	mysqli_close($con);
-
+	$con->close();
 }
 
+if($failed){
+	echo "error";
+}  
 ?>
 
